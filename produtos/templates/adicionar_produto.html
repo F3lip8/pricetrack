@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stalker de produto</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <input type="text" name="search" placeholder="Procure seus produtos" class="search-input">
+        <a href="" class="profile-icon"><img src="imagens/profile-icon.png" alt="Imagem de perfil"></a>
+    </header>
+
+    <main>
+        
+        <div class="container">
+            <h2>Adicionar Produto</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Salvar</button>
+            </form>
+            <form>
+                <!-- URL -->
+                <label for="url">URL do Produto</label>
+                <input class="input-form" type="url" id="url" placeholder="https://exemplo.com/produto" required>
+
+                <!-- Preço alvo -->
+                <label for="preco_alvo">Preço Alvo</label>
+                <input class="input-form" type="number" id="preco_alvo" placeholder="Ex: 199.90" step="0.01">
+                <small>(Opcional: você será avisado quando o preço for menor ou igual a esse valor)</small>
+
+                <!-- Botões -->
+                <div class="buttons">
+                    <a type="button" class="btn-add btn-cancel" href="{% url 'index.html' %}">Cancelar</a>
+                    <button type="submit" class="btn-add btn-save">Salvar Produto</button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+</body>
+</html>

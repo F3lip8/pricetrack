@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stalker de produto</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <a class="add-button" href="{% url 'adicionar_produto' %}">+</a>
+
+    <header>
+        <input type="text" name="search" placeholder="Procure seus produtos" class="search-input">
+        <a href="" class="profile-icon"><img src="{% static 'images/profile-icon.png' %}" alt="Imagem de perfil"></a>
+    </header>
+
+    <main>
+        {% if produtos|length == 0 %}
+            <div class="empty-massage-container">
+                <p class="empty-massage">Ainda não há nenhum produto...</p>
+            </div>
+        {% else %}
+        <h1>Meus Produtos</h1>
+
+        <section class="cards-section">
+
+            {% for produto in produtos %}
+            <article class="product-card">
+                <div class="dados">
+                    <div class="product-image">
+                        <img src="{{produto.imagem_url}}" alt="">
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-name">{{ produto.nome }}</h2>
+                        <div class="card-prices">
+                            <span class="old-price"><span class="text-prices">Preço original:</span> <span class="price"> R$ {{ produto.preco_antigo }}</span></span>
+                            <span class="new-price"><span class="text-prices">Preço atual:</span> <span class="price">R$ {{ produto.preco_atual }}</span></span>
+                        </div>
+                        <div class="change">
+                            <span class="price-change"></span>
+                            <span>-25%</span>
+                        </div>
+
+                        <div class="updateinfo">
+                            <span class="time">Atualizado há 2h</span>
+                            <p class="loja">Vendido por: Amazon</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <a href="#" class="btn">Detalhes</a>
+                    <a href="{{ produto.url }}" target="_blank" class="btn">Ver na loja</a>
+                </div>
+            </article>
+            {% endfor %}
+             
+        </section>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>Desenvolvido por L3fipe</p>
+    </footer>
+
+    
+</body>
+</html>
